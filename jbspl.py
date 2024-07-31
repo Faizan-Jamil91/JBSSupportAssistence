@@ -50,6 +50,8 @@ if 'customer_name' not in st.session_state:
     st.session_state.customer_name = ""
 if 'person_name' not in st.session_state:
     st.session_state.person_name = ""
+if 'inquiry' not in st.session_state:
+    st.session_state.inquiry = ""
 if 'response' not in st.session_state:
     st.session_state.response = ""
 
@@ -65,19 +67,19 @@ if not st.session_state.response:
         with col2:  # Place Person Name in the second column
             st.session_state.person_name = st.text_input("Person Name", value=st.session_state.person_name)
 
-        inquiry = st.text_area("Inquiry")
+        st.session_state.inquiry = st.text_area("Inquiry", value=st.session_state.inquiry)
         submit_button = st.form_submit_button(label="Submit")
 
     # Process the inquiry and generate the response when the form is submitted
     if submit_button:
-        if st.session_state.customer_name and st.session_state.person_name and inquiry:
+        if st.session_state.customer_name and st.session_state.person_name and st.session_state.inquiry:
             # Build response structure
             response_structure = f"""
             ## JBS Support Response 
 
             **Customer:** {st.session_state.customer_name}
             **Person:** {st.session_state.person_name}
-            **Inquiry:** {inquiry}
+            **Inquiry:** {st.session_state.inquiry}
 
             **Response:**
 
@@ -85,12 +87,12 @@ if not st.session_state.response:
             """
 
             try:
-                # Generate response using the ConversationChain
+                # Generate response using the ConversationChain (using keyword arguments)
                 response = conversation.run(
-                    response_structure + """
+                    prompt=response_structure + """
                     Please provide a detailed and helpful response to the customer's inquiry. 
                     Ensure that your response:
-    
+
                     - Addresses all aspects of the customer's question thoroughly.
                     - Includes references to any external data or solutions used.
                     - Maintains a friendly, professional, and approachable tone.
@@ -102,15 +104,15 @@ if not st.session_state.response:
                     Website: https://jbs.live/
 
                     Customer's Inquiry:
-                    {inquiry}
+                    {st.session_state.inquiry}
 
                     Contact Person:
-                    {person} from {customer} reached out with this request. Use all available information to provide the best possible support.
+                    {st.session_state.person_name} from {st.session_state.customer_name} reached out with this request. Use all available information to provide the best possible support.
                     """,
                     description=(
                     "Here's the customer's request:\n"
-                    "{inquiry}\n\n"
-                    "The contact person from {customer} is {person}. "
+                    "{st.session_state.inquiry}\n\n"
+                    "The contact person from {st.session_state.customer_name} is {st.session_state.person_name}. "
                     "Use all available resources to provide a complete and accurate response."
                     ),
                     expected_output=(
@@ -122,6 +124,7 @@ if not st.session_state.response:
                 # Display the response with a centered subheader
                 st.markdown("<h2 style='text-align: center;'>JBS Support Response</h2>", unsafe_allow_html=True)
                 st.markdown(response)
+                st.session_state.response = response  # Store the response in session state
 
             except Exception as e:  # Catch any unexpected errors
                 st.error(f"An error occurred: {e}")
@@ -145,23 +148,24 @@ else:
 
             **Customer:** {st.session_state.customer_name}
             **Person:** {st.session_state.person_name}
-            **Inquiry:** {inquiry}
+            **Inquiry:** {st.session_state.inquiry}
 
             **Response:**
             """
 
             try:
-                # Generate response using the ConversationChain
+                # Generate response using the ConversationChain (using keyword arguments)
                 response = conversation.run(
-                    response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand and also check jbs.live website if ask the jbs related question so please check jbs.live and response from authentic response"
+                    prompt=response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand. Additionally, if the inquiry relates to JBS, please check the jbs.live website for accurate information and base your response on authentic sources."
                 )
                 # Display the response with a centered subheader
                 st.markdown("<h2 style='text-align: center;'>JBS Support Response</h2>", unsafe_allow_html=True)
                 st.markdown(response)
+                st.session_state.response = response  # Store the response in session state
 
             except Exception as e:  # Catch any unexpected errors
                 st.error(f"An error occurred: {e}")
-                response = ""  # Reset response if error occurs
+                st.session_state.response = ""  # Reset response if error occurs
 
         else:
             st.warning("Please fill out the inquiry field to submit.")
