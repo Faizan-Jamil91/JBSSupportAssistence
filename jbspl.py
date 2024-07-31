@@ -104,6 +104,7 @@ if submit_button:
                 Please provide a detailed and helpful response to the customer's inquiry. 
                 Ensure that your response:
 
+                - Only provide the first level support.
                 - Addresses all aspects of the customer's question thoroughly.
                 - Includes references to any external data or solutions used.
                 - Maintains a friendly, professional, and approachable tone.
