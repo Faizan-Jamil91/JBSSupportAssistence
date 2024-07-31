@@ -88,7 +88,7 @@ if not st.session_state.response:
 
             try:
                 # Generate response using the ConversationChain
-                response = ChatGoogleGenerativeAI.run(response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand and jbs customer support emai address is customercare@jbs.live and jbs website name is https://jbs.live/.")
+                response = conversation.run(response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand and jbs customer support emai address is customercare@jbs.live and jbs website name is https://jbs.live/.")
 
                 # Display the response with a centered subheader
                 st.markdown("<h2 style='text-align: center;'>JBS Support Response</h2>", unsafe_allow_html=True)
