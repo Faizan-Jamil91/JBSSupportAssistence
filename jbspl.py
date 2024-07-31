@@ -70,7 +70,7 @@ if not st.session_state.response:
 
     # Process the inquiry and generate the response when the form is submitted
     if submit_button:
-        if st.session_state.customer_name and st.session_state.person_name and st.session_state.inquiry:
+        if st.session_state.customer_name and st.session_state.person_name and inquiry:
             # Build response structure
             response_structure = f"""
             ## JBS Support Response 
