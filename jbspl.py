@@ -35,7 +35,7 @@ else:
 os.environ["GOOGLE_API_KEY"] = "AIzaSyD_D1Ifsgs8V-gAH9AV81fJUpQN7p4Mhwc"
 
 # Initialize LLM and Memory
-llm = ChatGoogleGenerativeAI(temperature=0.0, model=llm_model)
+llm = ChatGoogleGenerativeAI(temperature=0.0, model=gemini-pro)
 memory = ConversationBufferMemory()
 
 # Create ConversationChain
