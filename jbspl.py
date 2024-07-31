@@ -50,8 +50,6 @@ if 'customer_name' not in st.session_state:
     st.session_state.customer_name = ""
 if 'person_name' not in st.session_state:
     st.session_state.person_name = ""
-if 'inquiry' not in st.session_state:
-    st.session_state.inquiry = ""
 if 'response' not in st.session_state:
     st.session_state.response = ""
 
@@ -67,19 +65,19 @@ if not st.session_state.response:
         with col2:  # Place Person Name in the second column
             st.session_state.person_name = st.text_input("Person Name", value=st.session_state.person_name)
 
-        st.session_state.inquiry = st.text_area("Inquiry", value=st.session_state.inquiry)
+        inquiry = st.text_area("Inquiry", value=inquiry)
         submit_button = st.form_submit_button(label="Submit")
 
     # Process the inquiry and generate the response when the form is submitted
     if submit_button:
-        if st.session_state.customer_name and st.session_state.person_name and st.session_state.inquiry:
+        if st.session_state.customer_name and st.session_state.person_name and inquiry:
             # Build response structure
             response_structure = f"""
             ## JBS Support Response 
 
             **Customer:** {st.session_state.customer_name}
             **Person:** {st.session_state.person_name}
-            **Inquiry:** {st.session_state.inquiry}
+            **Inquiry:** {inquiry}
 
             **Response:**
 
@@ -105,13 +103,13 @@ if not st.session_state.response:
                     Website: https://jbs.live/
 
                     Customer's Inquiry:
-                    {st.session_state.inquiry}
+                    {inquiry}
 
                     Contact Person:
                     {st.session_state.person_name} from {st.session_state.customer_name} reached out with this request. Use all available information to provide the best possible support.
 
                     Here's the customer's request:
-                    {st.session_state.inquiry}
+                    {inquiry}
 
                     The contact person from {st.session_state.customer_name} is {st.session_state.person_name}. 
                     Use all available resources to provide a complete and accurate response.
@@ -136,19 +134,19 @@ else:
     # Display the inquiry form again with a centered header
     st.markdown("<h1 style='text-align: center;'>Submit Another Inquiry</h1>", unsafe_allow_html=True)  
     with st.form(key="support_form_repeat"):
-        st.session_state.inquiry = st.text_area("Inquiry", value=st.session_state.inquiry)
+        inquiry = st.text_area("Inquiry", value=st.inquiry)
         submit_button = st.form_submit_button(label="Submit")
 
     # Process the new inquiry and generate the response when the form is submitted
     if submit_button:
-        if st.session_state.inquiry:
+        if inquiry:
             # Build response structure
             response_structure = f"""
             ## JBS Support Response 
 
             **Customer:** {st.session_state.customer_name}
             **Person:** {st.session_state.person_name}
-            **Inquiry:** {st.session_state.inquiry}
+            **Inquiry:** {inquiry}
 
             **Response:**
             """
