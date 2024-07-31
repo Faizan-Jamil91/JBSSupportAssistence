@@ -65,7 +65,7 @@ if not st.session_state.response:
         with col2:  # Place Person Name in the second column
             st.session_state.person_name = st.text_input("Person Name", value=st.session_state.person_name)
 
-        inquiry = st.text_area("Inquiry", value=inquiry)
+        inquiry = st.text_area("Inquiry")
         submit_button = st.form_submit_button(label="Submit")
 
     # Process the inquiry and generate the response when the form is submitted
@@ -134,7 +134,7 @@ else:
     # Display the inquiry form again with a centered header
     st.markdown("<h1 style='text-align: center;'>Submit Another Inquiry</h1>", unsafe_allow_html=True)  
     with st.form(key="support_form_repeat"):
-        inquiry = st.text_area("Inquiry", value=st.inquiry)
+        inquiry = st.text_area("Inquiry")
         submit_button = st.form_submit_button(label="Submit")
 
     # Process the new inquiry and generate the response when the form is submitted
