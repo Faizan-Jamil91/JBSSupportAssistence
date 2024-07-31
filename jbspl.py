@@ -39,7 +39,7 @@ llm = ChatGoogleGenerativeAI(temperature=0.0, model=llm_model)
 memory = ConversationBufferMemory()
 
 # Create ConversationChain
-conversation = ConversationChain(
+conversation = ChatGoogleGenerativeAI(
     llm=llm,
     memory=memory,
     verbose=True
