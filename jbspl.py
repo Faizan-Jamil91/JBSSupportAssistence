@@ -1,6 +1,7 @@
 import streamlit as st
 import datetime
 import os
+import google.generativeai as genai
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain_google_genai import ChatGoogleGenerativeAI
