@@ -89,7 +89,8 @@ if not st.session_state.response:
             try:
                 # Generate response using the ConversationChain (using keyword arguments)
                 response = conversation.run(
-                    input=response_structure + """
+                    input=response_structure + 
+                    """
                     Please provide a detailed and helpful response to the customer's inquiry. 
                     Ensure that your response:
 
@@ -108,17 +109,16 @@ if not st.session_state.response:
 
                     Contact Person:
                     {st.session_state.person_name} from {st.session_state.customer_name} reached out with this request. Use all available information to provide the best possible support.
-                    """,
-                    description=(
-                    "Here's the customer's request:\n"
-                    "{st.session_state.inquiry}\n\n"
-                    "The contact person from {st.session_state.customer_name} is {st.session_state.person_name}. "
-                    "Use all available resources to provide a complete and accurate response."
-                    ),
-                    expected_output=(
-                    "A thorough and informative response that covers all aspects of the inquiry.\n"
-                    "The response should be well-referenced, complete, and delivered in a clear, friendly manner."
-                    )
+
+                    Here's the customer's request:
+                    {st.session_state.inquiry}
+
+                    The contact person from {st.session_state.customer_name} is {st.session_state.person_name}. 
+                    Use all available resources to provide a complete and accurate response.
+
+                    A thorough and informative response that covers all aspects of the inquiry.
+                    The response should be well-referenced, complete, and delivered in a clear, friendly manner.
+                    """
                 )
 
                 # Display the response with a centered subheader
