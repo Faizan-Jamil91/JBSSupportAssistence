@@ -65,7 +65,7 @@ if not st.session_state.response:
         with col2:  # Place Person Name in the second column
             st.session_state.person_name = st.text_input("Person Name", value=st.session_state.person_name)
 
-        inquiry = st.text_area("Inquiry", value=st.session_state.inquiry)
+        inquiry = st.text_area("Inquiry")
         submit_button = st.form_submit_button(label="Submit")
 
     # Process the inquiry and generate the response when the form is submitted
