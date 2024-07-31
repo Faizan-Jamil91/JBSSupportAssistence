@@ -89,7 +89,7 @@ if not st.session_state.response:
             try:
                 # Generate response using the ConversationChain (using keyword arguments)
                 response = conversation.run(
-                    prompt=response_structure + """
+                    input=response_structure + """
                     Please provide a detailed and helpful response to the customer's inquiry. 
                     Ensure that your response:
 
@@ -156,7 +156,7 @@ else:
             try:
                 # Generate response using the ConversationChain (using keyword arguments)
                 response = conversation.run(
-                    prompt=response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand. Additionally, if the inquiry relates to JBS, please check the jbs.live website for accurate information and base your response on authentic sources."
+                    input=response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand. Additionally, if the inquiry relates to JBS, please check the jbs.live website for accurate information and base your response on authentic sources."
                 )
                 # Display the response with a centered subheader
                 st.markdown("<h2 style='text-align: center;'>JBS Support Response</h2>", unsafe_allow_html=True)
