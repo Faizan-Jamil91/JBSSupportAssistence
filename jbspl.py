@@ -36,7 +36,7 @@ else:
 os.environ["GOOGLE_API_KEY"] = "AIzaSyD_D1Ifsgs8V-gAH9AV81fJUpQN7p4Mhwc"
 
 # Initialize LLM and Memory
-llm = genai(temperature=0.0, model=llm_model)
+llm = genai.config(temperature=0.0, model=llm_model)
 memory = ConversationBufferMemory()
 
 # Create ConversationChain
