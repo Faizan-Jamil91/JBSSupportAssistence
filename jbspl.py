@@ -86,7 +86,38 @@ if not st.session_state.response:
 
             try:
                 # Generate response using the ConversationChain
-                response = conversation.run(response_structure + "Please provide a comprehensive and helpful response to the customer's inquiry. Ensure it addresses all aspects of their question and is well-written and easy to understand and jbs customer support emai address is customercare@jbs.live and jbs website name is https://jbs.live/.")
+                response = conversation.run(
+    response_structure + """
+    Please provide a detailed and helpful response to the customer's inquiry. 
+    Ensure that your response:
+    
+    - Addresses all aspects of the customer's question thoroughly.
+    - Includes references to any external data or solutions used.
+    - Maintains a friendly, professional, and approachable tone.
+    - Is written clearly and is easy to understand, avoiding jargon unless necessary.
+    - Is accurate and complete, leaving no questions unanswered.
+
+    For support inquiries, you can contact JBS Customer Support at:
+    Email: customercare@jbs.live
+    Website: https://jbs.live/
+
+    Customer's Inquiry:
+    {inquiry}
+
+    Contact Person:
+    {person} from {customer} reached out with this request. Use all available information to provide the best possible support.
+    """,
+    description=(
+        "Here's the customer's request:\n"
+        "{inquiry}\n\n"
+        "The contact person from {customer} is {person}. "
+        "Use all available resources to provide a complete and accurate response."
+    ),
+    expected_output=(
+        "A thorough and informative response that covers all aspects of the inquiry.\n"
+        "The response should be well-referenced, complete, and delivered in a clear, friendly manner."
+    )
+)
 
                 # Display the response with a centered subheader
                 st.markdown("<h2 style='text-align: center;'>JBS Support Response</h2>", unsafe_allow_html=True)
