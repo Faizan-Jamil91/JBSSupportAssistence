@@ -1,7 +1,6 @@
 import streamlit as st
 import datetime
 import os
-import google.generativeai as genai
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -36,11 +35,11 @@ else:
 os.environ["GOOGLE_API_KEY"] = "AIzaSyD_D1Ifsgs8V-gAH9AV81fJUpQN7p4Mhwc"
 
 # Initialize LLM and Memory
-llm = genai.GenerativeModel(temperature=0.0, model=llm_model)
+llm = ChatGoogleGenerativeAI(temperature=0.0, model=llm_model)
 memory = ConversationBufferMemory()
 
 # Create ConversationChain
-conversation = GenerativeModel(
+conversation = ConversationChain(
     llm=llm,
     memory=memory,
     verbose=True
