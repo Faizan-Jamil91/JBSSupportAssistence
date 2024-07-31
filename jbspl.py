@@ -114,7 +114,7 @@ else:
 
             **Customer:** {st.session_state.customer_name}
             **Person:** {st.session_state.person_name}
-            **Inquiry:** {st.session_state.inquiry}
+            **Inquiry:** {inquiry}
 
             **Response:**
             """
