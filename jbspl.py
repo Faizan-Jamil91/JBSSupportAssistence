@@ -77,7 +77,16 @@ target_date = datetime.date(2024, 6, 12)
 llm_model = "gemini-2.0-flash"  # Maintained for future date logic
 
 # API Key Management
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCYyo69R1YhYArdTbs765WTi70-93D0r4Y"
+if 'GOOGLE_API_KEY' not in os.environ:
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except:
+        pass
+
+if not os.getenv("GOOGLE_API_KEY"):
+    st.warning("API key not found. Please configure your environment variables.")
+    st.stop()
 
 # Initialize LLM and Memory
 llm = ChatGoogleGenerativeAI(
